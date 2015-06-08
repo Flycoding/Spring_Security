@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zhe800.app.persistence.UserMapper">
+	
+	<resultMap id="User" type="com.zhe800.app.domain.User">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="ACCOUNT" property="account" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="base_columns">
+		ID,ACCOUNT,PASSWORD
+	</sql>
+	
+	<select id="selectByAccount" resultMap="User" parameterType="java.lang.String">
+		SELECT
+		<include refid="base_columns"/>
+		FROM t_user
+		WHERE 
+		ACCOUNT = #{account}
+	</select>
+	
+</mapper>
+
+
